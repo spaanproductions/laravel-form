@@ -31,9 +31,10 @@
         "nesbot/carbon": "^2.0|^3.0"
     },
     "require-dev": {
+        "orchestra/testbench": "^7.0|^8.0|^9.0",
         "illuminate/database": "^9.0|^10.0|^11.0",
-        "mockery/mockery": "~1.0",
-        "phpunit/phpunit": "^10.0"
+        "mockery/mockery": "^1.5",
+        "phpunit/phpunit": "^9.5.10|^10.0"
     },
     "autoload": {
         "psr-4": {
@@ -42,6 +43,11 @@
         "files": [
             "helper/helpers.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SpaanProductions\\LaravelForm\\Tests\\": "tests"
+        }
     },
     "extra": {
         "laravel": {

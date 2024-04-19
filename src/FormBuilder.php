@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\HtmlString;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Traits\Macroable;
 
 class FormBuilder
@@ -1297,9 +1298,9 @@ class FormBuilder
             return $old;
         }
 
-        if (function_exists('app')) {
-            $hasNullMiddleware = app("Illuminate\Contracts\Http\Kernel")
-                ->hasMiddleware(ConvertEmptyStringsToNull::class);
+        if (function_exists('app') && Route::current()) {
+	        $middleware = Route::gatherRouteMiddleware(Route::current());
+            $hasNullMiddleware = collect($middleware)->contains(ConvertEmptyStringsToNull::class);
 
             if ($hasNullMiddleware
                 && is_null($old)
