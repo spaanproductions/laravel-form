@@ -1,10 +1,10 @@
 <?php
 
 use Carbon\Carbon;
-use Collective\Html\Eloquent\FormAccessible;
+use SpaanProductions\LaravelForm\Eloquent\FormAccessible;
 use Illuminate\Database\Eloquent\Model;
-use Collective\Html\FormBuilder;
-use Collective\Html\HtmlBuilder;
+use SpaanProductions\LaravelForm\FormBuilder;
+use SpaanProductions\LaravelForm\HtmlBuilder;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteCollection;
@@ -14,7 +14,14 @@ use Mockery as m;
 
 class FormAccessibleTest extends PHPUnit\Framework\TestCase
 {
-    protected function setUp(): void
+	private Carbon $now;
+	private array $modelData;
+	private UrlGenerator $urlGenerator;
+	private m\MockInterface|m\LegacyMockInterface|Factory $viewFactory;
+	private HtmlBuilder $htmlBuilder;
+	private FormBuilder $formBuilder;
+
+	protected function setUp(): void
     {
         Capsule::table('models')->truncate();
         Model::unguard();

@@ -1,7 +1,7 @@
 <?php
 
-use Collective\Html\FormBuilder;
-use Collective\Html\HtmlBuilder;
+use SpaanProductions\LaravelForm\FormBuilder;
+use SpaanProductions\LaravelForm\HtmlBuilder;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
@@ -14,12 +14,12 @@ use Mockery as m;
 
 class FormBuilderTest extends PHPUnit\Framework\TestCase
 {
-    /**
-     * @var FormBuilder
-     */
-    protected $formBuilder;
+	private UrlGenerator $urlGenerator;
+	private m\MockInterface|m\LegacyMockInterface|Factory $viewFactory;
+	private HtmlBuilder $htmlBuilder;
+	private FormBuilder $formBuilder;
 
-    /**
+	/**
      * Setup the test environment.
      */
     protected function setUp(): void

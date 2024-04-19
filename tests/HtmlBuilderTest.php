@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Contracts\View\Factory;
-use Collective\Html\HtmlBuilder;
+use SpaanProductions\LaravelForm\HtmlBuilder;
 use Illuminate\Http\Request;
 use Illuminate\Routing\RouteCollection;
 use Illuminate\Routing\UrlGenerator;
@@ -9,8 +9,11 @@ use Mockery as m;
 
 class HtmlBuilderTest extends PHPUnit\Framework\TestCase
 {
+	private UrlGenerator $urlGenerator;
+	private m\MockInterface|m\LegacyMockInterface|Factory $viewFactory;
+	private HtmlBuilder $htmlBuilder;
 
-    /**
+	/**
      * Setup the test environment.
      */
     protected function setUp(): void
@@ -127,7 +130,7 @@ class HtmlBuilderTest extends PHPUnit\Framework\TestCase
 
     public function testMailto()
     {
-        $htmlBuilder = m::mock('Collective\Html\HtmlBuilder[obfuscate,email]', [$this->urlGenerator, $this->viewFactory]);
+        $htmlBuilder = m::mock('SpaanProductions\LaravelForm\HtmlBuilder[obfuscate,email]', [$this->urlGenerator, $this->viewFactory]);
         $htmlBuilder->shouldReceive('obfuscate', 'email')->andReturnUsing(function () {
             $args = func_get_args();
             return $args[0];

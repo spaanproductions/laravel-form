@@ -1,11 +1,11 @@
 <?php
 
-namespace Collective\Html;
+namespace SpaanProductions\LaravelForm;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Collective\Html\HtmlBuilder
+ * @see \SpaanProductions\LaravelForm\HtmlBuilder
  */
 class HtmlFacade extends Facade
 {

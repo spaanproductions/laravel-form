@@ -1,6 +1,6 @@
 <?php
 
-namespace Collective\Html;
+namespace SpaanProductions\LaravelForm;
 
 use BadMethodCallException;
 use Illuminate\Support\HtmlString;

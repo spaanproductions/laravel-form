@@ -1,15 +1,14 @@
 <?php
 
-namespace Collective\Html;
+namespace SpaanProductions\LaravelForm;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \Collective\Html\FormBuilder
+ * @see \SpaanProductions\LaravelForm\FormBuilder
  */
 class FormFacade extends Facade
 {
-
     /**
      * Get the registered name of the component.
      *

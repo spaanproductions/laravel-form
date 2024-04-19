@@ -1,6 +1,6 @@
 <?php
 
-namespace Collective\Html\Eloquent;
+namespace SpaanProductions\LaravelForm\Eloquent;
 
 use ReflectionClass;
 use ReflectionMethod;
@@ -8,7 +8,6 @@ use Illuminate\Support\Str;
 
 trait FormAccessible
 {
-
     /**
      * A cached ReflectionClass instance for $this
      *

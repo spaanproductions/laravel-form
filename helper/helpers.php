@@ -68,3 +68,11 @@ if (! function_exists('link_to_action')) {
         return app('html')->linkAction($action, $title, $parameters, $attributes);
     }
 }
+
+if (! function_exists('form')) {
+	/** Form Helper. */
+	function form(): \SpaanProductions\LaravelForm\FormBuilder
+	{
+		return app('form');
+	}
+}

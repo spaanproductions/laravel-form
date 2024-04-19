@@ -1,6 +1,6 @@
 <?php
 
-namespace Collective\Html;
+namespace SpaanProductions\LaravelForm;
 
 use Illuminate\Contracts\Support\DeferrableProvider;
 use Illuminate\Support\ServiceProvider;

@@ -1,7 +1,8 @@
 <?php
 
-namespace Collective\Html;
+namespace SpaanProductions\LaravelForm;
 
+use Carbon\Carbon;
 use BadMethodCallException;
 use DateTime;
 use Illuminate\Contracts\Routing\UrlGenerator;
@@ -24,7 +25,7 @@ class FormBuilder
     /**
      * The HTML builder instance.
      *
-     * @var \Collective\Html\HtmlBuilder
+     * @var \SpaanProductions\LaravelForm\HtmlBuilder
      */
     protected $html;
 
@@ -110,7 +111,7 @@ class FormBuilder
     /**
      * Create a new form builder instance.
      *
-     * @param  \Collective\Html\HtmlBuilder               $html
+     * @param  \SpaanProductions\LaravelForm\HtmlBuilder               $html
      * @param  \Illuminate\Contracts\Routing\UrlGenerator $url
      * @param  \Illuminate\Contracts\View\Factory         $view
      * @param  string                                     $csrfToken
@@ -713,12 +714,12 @@ class FormBuilder
      *
      * @return \Illuminate\Support\HtmlString
      */
-    public function selectMonth($name, $selected = null, $options = [], $format = '%B')
+    public function selectMonth($name, $selected = null, $options = [], $format = 'MMMM')
     {
         $months = [];
 
         foreach (range(1, 12) as $month) {
-            $months[$month] = strftime($format, mktime(0, 0, 0, $month, 1));
+            $months[$month] = Carbon::create(month: $month)->isoFormat($format);
         }
 
         return $this->select($name, $months, $selected, $options);
@@ -1238,7 +1239,7 @@ class FormBuilder
      */
     protected function getAppendage($method)
     {
-        list($method, $appendage) = [strtoupper($method), ''];
+        [$method, $appendage] = [strtoupper($method), ''];
 
         // If the HTTP method is in this list of spoofed methods, we will attach the
         // method spoofer hidden input to the form. This allows us to use regular
