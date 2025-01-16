@@ -342,16 +342,20 @@ class FormBuilderTest extends TestCase
 
 	public function testFormDate()
 	{
+		$now = \Carbon\Carbon::now();
+		$immutableNow = \Carbon\CarbonImmutable::now();
+
 		$form1 = $this->formBuilder->date('foo');
 		$form2 = $this->formBuilder->date('foo', '2015-02-20');
-		$form3 = $this->formBuilder->date('foo', \Carbon\Carbon::now());
+		$form3 = $this->formBuilder->date('foo', $now);
 		$form4 = $this->formBuilder->date('foo', null, ['class' => 'span2']);
+		$form5 = $this->formBuilder->date('foo', $immutableNow);
 
 		$this->assertEquals('<input name="foo" type="date">', $form1);
 		$this->assertEquals('<input name="foo" type="date" value="2015-02-20">', $form2);
-		$this->assertEquals('<input name="foo" type="date" value="' . \Carbon\Carbon::now()->format('Y-m-d') . '">',
-			$form3);
+		$this->assertEquals('<input name="foo" type="date" value="' . $now->format('Y-m-d') . '">', $form3);
 		$this->assertEquals('<input class="span2" name="foo" type="date">', $form4);
+		$this->assertEquals('<input name="foo" type="date" value="' . $immutableNow->format('Y-m-d') . '">', $form5);
 	}
 
 	public function testFormTime()
