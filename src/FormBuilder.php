@@ -300,6 +300,7 @@ class FormBuilder
 
         if (! in_array($type, $this->skipValueTypes)) {
             $value = $this->getValueAttribute($name, $value);
+            $value = $this->castValue($type, $value);
         }
 
         // Once we have the type, value, and ID we can merge them into the rest of the
@@ -1326,6 +1327,23 @@ class FormBuilder
             return $this->getModelValueAttribute($name);
         }
     }
+
+	public function castValue($type, $value = null)
+	{
+		if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
+			$value = match ($type) {
+				'date' => $value->format('Y-m-d'),
+				'datetime' => $value->format(DateTime::RFC3339),
+				'datetime-local' => $value->format('Y-m-d\TH:i'),
+				'time' => $value->format('H:i'),
+				'month' => $value->format('Y-m'),
+				'week' => $value->format('Y-\WW'),
+				default => $value,
+			};
+		}
+
+		return $value;
+	}
 
     /**
      * Take Request in fill process

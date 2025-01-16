@@ -3,6 +3,8 @@
 namespace SpaanProductions\LaravelForm\Tests\Unit;
 
 use Mockery as m;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Session\Store;
@@ -356,6 +358,30 @@ class FormBuilderTest extends TestCase
 		$this->assertEquals('<input name="foo" type="date" value="' . $now->format('Y-m-d') . '">', $form3);
 		$this->assertEquals('<input class="span2" name="foo" type="date">', $form4);
 		$this->assertEquals('<input name="foo" type="date" value="' . $immutableNow->format('Y-m-d') . '">', $form5);
+	}
+
+	public function testFormModelDates()
+	{
+		$this->setModel([
+			'foo' => Carbon::parse('2015-02-20 12:25:35'),
+			'bar' => CarbonImmutable::parse('2015-02-20 12:25:35'),
+		]);
+
+		$form1 = $this->formBuilder->date('foo');
+		$form2 = $this->formBuilder->date('bar');
+		$form3 = $this->formBuilder->datetime('foo');
+		$form4 = $this->formBuilder->datetimeLocal('foo');
+		$form5 = $this->formBuilder->time('foo');
+		$form6 = $this->formBuilder->month('foo');
+		$form7 = $this->formBuilder->week('foo');
+
+		$this->assertEquals('<input name="foo" type="date" value="2015-02-20">', $form1);
+		$this->assertEquals('<input name="bar" type="date" value="2015-02-20">', $form2);
+		$this->assertEquals('<input name="foo" type="datetime" value="2015-02-20T12:25:35+00:00">', $form3);
+		$this->assertEquals('<input name="foo" type="datetime-local" value="2015-02-20T12:25">', $form4);
+		$this->assertEquals('<input name="foo" type="time" value="12:25">', $form5);
+		$this->assertEquals('<input name="foo" type="month" value="2015-02">', $form6);
+		$this->assertEquals('<input name="foo" type="week" value="2015-W08">', $form7);
 	}
 
 	public function testFormTime()
