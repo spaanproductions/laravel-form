@@ -3,6 +3,7 @@
 namespace SpaanProductions\LaravelForm;
 
 use Carbon\Carbon;
+use DateTimeImmutable;
 use BadMethodCallException;
 use DateTime;
 use Illuminate\Contracts\Routing\UrlGenerator;
@@ -433,7 +434,7 @@ class FormBuilder
      */
     public function date($name, $value = null, $options = [])
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
             $value = $value->format('Y-m-d');
         }
 
@@ -451,7 +452,7 @@ class FormBuilder
      */
     public function datetime($name, $value = null, $options = [])
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
             $value = $value->format(DateTime::RFC3339);
         }
 
@@ -469,7 +470,7 @@ class FormBuilder
      */
     public function datetimeLocal($name, $value = null, $options = [])
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
             $value = $value->format('Y-m-d\TH:i');
         }
 
@@ -487,7 +488,7 @@ class FormBuilder
      */
     public function time($name, $value = null, $options = [])
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
             $value = $value->format('H:i');
         }
 
@@ -519,7 +520,7 @@ class FormBuilder
      */
     public function week($name, $value = null, $options = [])
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
             $value = $value->format('Y-\WW');
         }
 
@@ -1038,7 +1039,7 @@ class FormBuilder
      */
     public function month($name, $value = null, $options = [])
     {
-        if ($value instanceof DateTime) {
+        if ($value instanceof DateTime || $value instanceof DateTimeImmutable) {
             $value = $value->format('Y-m');
         }
 
