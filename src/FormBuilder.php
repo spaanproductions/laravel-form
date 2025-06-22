@@ -428,7 +428,7 @@ class FormBuilder
      * Create a date input field.
      *
      * @param  string $name
-     * @param  string $value
+     * @param  string|DateTime|DateTimeImmutable $value
      * @param  array  $options
      *
      * @return \Illuminate\Support\HtmlString
@@ -446,7 +446,7 @@ class FormBuilder
      * Create a datetime input field.
      *
      * @param  string $name
-     * @param  string $value
+     * @param  string|DateTime|DateTimeImmutable $value
      * @param  array  $options
      *
      * @return \Illuminate\Support\HtmlString
@@ -464,7 +464,7 @@ class FormBuilder
      * Create a datetime-local input field.
      *
      * @param  string $name
-     * @param  string $value
+     * @param  string|DateTime|DateTimeImmutable $value
      * @param  array  $options
      *
      * @return \Illuminate\Support\HtmlString
@@ -482,7 +482,7 @@ class FormBuilder
      * Create a time input field.
      *
      * @param  string $name
-     * @param  string $value
+     * @param  string|DateTime|DateTimeImmutable $value
      * @param  array  $options
      *
      * @return \Illuminate\Support\HtmlString
@@ -514,7 +514,7 @@ class FormBuilder
      * Create a week input field.
      *
      * @param  string $name
-     * @param  string $value
+     * @param  string|DateTime|DateTimeImmutable $value
      * @param  array  $options
      *
      * @return \Illuminate\Support\HtmlString
