@@ -7,9 +7,17 @@ use SpaanProductions\LaravelForm\HtmlServiceProvider;
 class TestCase extends \Orchestra\Testbench\TestCase
 {
 	protected function getPackageProviders($app)
-{
-	return [
-		HtmlServiceProvider::class,
-	];
-}
+	{
+		return [
+			HtmlServiceProvider::class,
+		];
+	}
+
+	protected function getPackageAliases($app)
+	{
+		return [
+			"Form" => "SpaanProductions\LaravelForm\FormFacade",
+			"Html" => "SpaanProductions\LaravelForm\HtmlFacade"
+		];
+	}
 }
