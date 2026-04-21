@@ -819,34 +819,30 @@ class FormBuilder
         return $this->toHtmlString('<option' . $this->html->attributes($options) . '>' . e($display, false) . '</option>');
     }
 
-    /**
-     * Determine if the value is selected.
-     *
-     * @return null|string
-     */
-    protected function getSelectedValue($value, $selected): ?string
+    /** Determine if the value is selected. */
+    protected function getSelectedValue($value, $selected): bool
     {
         if (is_array($selected)) {
-            return in_array($value, $selected, true) || in_array((string) $value, $selected, true) ? 'selected' : null;
+            return in_array($value, $selected, true) || in_array((string) $value, $selected, true);
         }
 
 		if ($selected instanceof Collection) {
-            return $selected->contains($value) ? 'selected' : null;
+            return $selected->contains($value);
         }
 
         if (is_int($value) && is_bool($selected)) {
-            return ((bool)$value === $selected)  ? 'selected' : null;
+            return ((bool)$value === $selected) ;
         }
 
 	    if (interface_exists(\BackedEnum::class) && $selected instanceof \BackedEnum) {
-		    return ((string) $value === (string) $selected->value) ? 'selected' : null;
+		    return ((string) $value === (string) $selected->value);
 	    }
 
 	    if (interface_exists(\UnitEnum::class) && $selected instanceof \UnitEnum) {
-		    return ((string) $value === $selected->name) ? 'selected' : null;
+		    return ((string) $value === $selected->name);
 	    }
 
-        return ((string) $value === (string) $selected) ? 'selected' : null;
+        return ((string) $value === (string) $selected);
     }
 
     /**

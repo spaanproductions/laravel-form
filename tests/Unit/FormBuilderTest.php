@@ -460,7 +460,7 @@ class FormBuilderTest extends TestCase
 			'L'
 		);
 		$this->assertEquals($select,
-			'<select name="size"><option value="L" selected="selected">Large</option><option value="S">Small</option></select>');
+			'<select name="size"><option value="L" selected>Large</option><option value="S">Small</option></select>');
 
 		$select = $this->formBuilder->select(
 			'size',
@@ -470,7 +470,7 @@ class FormBuilderTest extends TestCase
 		);
 		$this->assertEquals(
 			$select,
-			'<select multiple name="size"><option value="0">All Sizes</option><option value="L">Large</option><option value="M" selected="selected">Medium</option><option value="S">Small</option></select>');
+			'<select multiple name="size"><option value="0">All Sizes</option><option value="L">Large</option><option value="M" selected>Medium</option><option value="S">Small</option></select>');
 
 		$select = $this->formBuilder->select(
 			'size',
@@ -570,7 +570,7 @@ class FormBuilderTest extends TestCase
 		$result = $this->formBuilder->select('countries', [1 => 'L', 2 => 'M']);
 
 		$this->assertEquals(
-			'<select name="countries"><option value="1" selected="selected">L</option><option value="2">M</option></select>',
+			'<select name="countries"><option value="1" selected>L</option><option value="2">M</option></select>',
 			$result
 		);
 
@@ -655,17 +655,17 @@ class FormBuilderTest extends TestCase
 		$session->shouldReceive('getOldInput')->once()->with('size')->andReturn('M');
 		$select = $this->formBuilder->select('size', $list, 'S');
 		$this->assertEquals($select,
-			'<select name="size"><option value="L">Large</option><option value="M" selected="selected">Medium</option><option value="S">Small</option></select>');
+			'<select name="size"><option value="L">Large</option><option value="M" selected>Medium</option><option value="S">Small</option></select>');
 
 		$session->shouldReceive('getOldInput')->once()->with('size.multi')->andReturn(['L', 'S']);
 		$select = $this->formBuilder->select('size[multi][]', $list, 'M', ['multiple' => 'multiple']);
 		$this->assertEquals($select,
-			'<select multiple="multiple" name="size[multi][]"><option value="L" selected="selected">Large</option><option value="M">Medium</option><option value="S" selected="selected">Small</option></select>');
+			'<select multiple="multiple" name="size[multi][]"><option value="L" selected>Large</option><option value="M">Medium</option><option value="S" selected>Small</option></select>');
 
 		$session->shouldReceive('getOldInput')->once()->with('size.key')->andReturn(null);
 		$select = $this->formBuilder->select('size[key]', $list);
 		$this->assertEquals($select,
-			'<select name="size[key]"><option value="L">Large</option><option value="M">Medium</option><option value="S" selected="selected">Small</option></select>');
+			'<select name="size[key]"><option value="L">Large</option><option value="M">Medium</option><option value="S" selected>Small</option></select>');
 	}
 
 	public function testFormWithOptionalPlaceholder()
@@ -677,7 +677,7 @@ class FormBuilderTest extends TestCase
 			['placeholder' => 'Select One...']
 		);
 		$this->assertEquals($select,
-			'<select name="size"><option selected="selected" value="">Select One...</option><option value="L">Large</option><option value="S">Small</option></select>');
+			'<select name="size"><option selected value="">Select One...</option><option value="L">Large</option><option value="S">Small</option></select>');
 
 		$select = $this->formBuilder->select(
 			'size',
@@ -686,7 +686,7 @@ class FormBuilderTest extends TestCase
 			['placeholder' => 'Select One...']
 		);
 		$this->assertEquals($select,
-			'<select name="size"><option value="">Select One...</option><option value="L" selected="selected">Large</option><option value="S">Small</option></select>');
+			'<select name="size"><option value="">Select One...</option><option value="L" selected>Large</option><option value="S">Small</option></select>');
 
 		$select = $this->formBuilder->select(
 			'encoded_html',
@@ -695,7 +695,7 @@ class FormBuilderTest extends TestCase
 			['placeholder' => 'Select the &nbsp;']
 		);
 		$this->assertEquals($select,
-			'<select name="encoded_html"><option selected="selected" value="">Select the &nbsp;</option><option value="no_break_space">&nbsp;</option><option value="ampersand">&amp;</option><option value="lower_than">&lt;</option></select>'
+			'<select name="encoded_html"><option selected value="">Select the &nbsp;</option><option value="no_break_space">&nbsp;</option><option value="ampersand">&amp;</option><option value="lower_than">&lt;</option></select>'
 		);
 	}
 
@@ -709,7 +709,7 @@ class FormBuilderTest extends TestCase
 			$select1);
 		$this->assertStringContainsString('<select id="foo" name="year"><option value="2000">2000</option><option value="2001">2001</option>',
 			$select2);
-		$this->assertStringContainsString('<select name="year"><option value="2000" selected="selected">2000</option><option value="2001">2001</option>',
+		$this->assertStringContainsString('<select name="year"><option value="2000" selected>2000</option><option value="2001">2001</option>',
 			$select3);
 	}
 
@@ -729,7 +729,7 @@ class FormBuilderTest extends TestCase
 
 		$this->assertStringContainsString('<select name="month"><option value="1">January</option><option value="2">February</option>',
 			$month1);
-		$this->assertStringContainsString('<select name="month"><option value="1" selected="selected">January</option>', $month2);
+		$this->assertStringContainsString('<select name="month"><option value="1" selected>January</option>', $month2);
 		$this->assertStringContainsString('<select id="foo" name="month"><option value="1">January</option>', $month3);
 	}
 
