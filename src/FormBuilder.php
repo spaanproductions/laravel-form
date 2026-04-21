@@ -822,21 +822,30 @@ class FormBuilder
     /**
      * Determine if the value is selected.
      *
-     * @param  string $value
-     * @param  string $selected
-     *
      * @return null|string
      */
-    protected function getSelectedValue($value, $selected)
+    protected function getSelectedValue($value, $selected): ?string
     {
         if (is_array($selected)) {
             return in_array($value, $selected, true) || in_array((string) $value, $selected, true) ? 'selected' : null;
-        } elseif ($selected instanceof Collection) {
+        }
+
+		if ($selected instanceof Collection) {
             return $selected->contains($value) ? 'selected' : null;
         }
+
         if (is_int($value) && is_bool($selected)) {
-            return (bool)$value === $selected;
+            return ((bool)$value === $selected)  ? 'selected' : null;
         }
+
+	    if (interface_exists(\BackedEnum::class) && $selected instanceof \BackedEnum) {
+		    return ((string) $value === (string) $selected->value) ? 'selected' : null;
+	    }
+
+	    if (interface_exists(\UnitEnum::class) && $selected instanceof \UnitEnum) {
+		    return ((string) $value === $selected->name) ? 'selected' : null;
+	    }
+
         return ((string) $value === (string) $selected) ? 'selected' : null;
     }
 
