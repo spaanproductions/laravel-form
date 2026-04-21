@@ -820,29 +820,29 @@ class FormBuilder
     }
 
     /** Determine if the value is selected. */
-    protected function getSelectedValue($value, $selected): bool
+    protected function getSelectedValue($value, $selected): ?bool
     {
         if (is_array($selected)) {
-            return in_array($value, $selected, true) || in_array((string) $value, $selected, true);
+            return in_array($value, $selected, true) || in_array((string) $value, $selected, true) ? true : null;
         }
 
 		if ($selected instanceof Collection) {
-            return $selected->contains($value);
+            return $selected->contains($value) ? true : null;
         }
 
         if (is_int($value) && is_bool($selected)) {
-            return ((bool)$value === $selected) ;
+            return ((bool)$value === $selected) ? true : null;
         }
 
 	    if (interface_exists(\BackedEnum::class) && $selected instanceof \BackedEnum) {
-		    return ((string) $value === (string) $selected->value);
+		    return ((string) $value === (string) $selected->value) ? true : null;
 	    }
 
 	    if (interface_exists(\UnitEnum::class) && $selected instanceof \UnitEnum) {
-		    return ((string) $value === $selected->name);
+		    return ((string) $value === $selected->name) ? true : null;
 	    }
 
-        return ((string) $value === (string) $selected);
+        return ((string) $value === (string) $selected) ? true : null;
     }
 
     /**
